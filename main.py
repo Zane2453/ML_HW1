@@ -50,7 +50,7 @@ def Newton(data_points, base, iterations):
     A = np.array(A)
     A_reverse = A.T
 
-    '''for iteration in range(iterations):
+    for iteration in range(iterations):
         hessiian = np.dot(A_reverse, A)
         gradient_l = np.dot(hessiian, x)
         gradient_l = np.multiply(gradient_l, 2)
@@ -60,13 +60,12 @@ def Newton(data_points, base, iterations):
 
         gradient = gradient_l - gradient_r
 
-        hessiian = np.multiply(hessiian, 2)'''
+        hessiian = np.multiply(hessiian, 2)
+        hessiian_inverse = Ieverse(hessiian, I, base)
 
-    result = np.dot(A_reverse, A)
-    result = Ieverse(result, I, base)
+        x = x - np.dot(hessiian_inverse, gradient)
 
-    result = np.dot(result, A_reverse)
-    result = np.dot(result, b)
+    result = x
 
     result_poly = Polynomial(result, base)
     result_error = Total_error(result, base, Input, b)
